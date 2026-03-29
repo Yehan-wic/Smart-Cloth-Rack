@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales | Smart Clothing Rack</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#f9f506",
+            background: "#f8f8f5"
+          },
+          fontFamily: {
+            display: ["Spline Sans"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-background font-display text-gray-900 min-h-screen">
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 bg-white border-b px-4 py-3 z-50">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined">point_of_sale</span>
+    <h1 class="text-xl font-bold">Sales Counter</h1>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="pb-28 px-4 mt-4 space-y-6">
+
+  <!-- SCAN BARCODE -->
+  <section class="bg-white p-4 rounded-xl shadow-sm space-y-3">
+    <h2 class="font-bold text-lg">Scan Items</h2>
+
+    <input
+      id="salesBarcodeInput"
+      placeholder="Scan barcode here"
+      class="w-full border rounded px-3 py-3 text-lg"
+      autofocus
+    />
+
+    <p class="text-xs text-gray-500">
+      Scan items one by one. They will appear in the list below.
+    </p>
+  </section>
+
+  <!-- ITEMS TO SELL -->
+  <section class="bg-white p-4 rounded-xl shadow-sm">
+    <h2 class="font-bold mb-3">Items to Sell</h2>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border rounded-lg table-fixed text-sm">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="w-2/5 px-3 py-2 text-left">Item</th>
+            <th class="w-1/5 px-3 py-2 text-center">Size</th>
+            <th class="w-1/5 px-3 py-2 text-center">Barcode</th>
+            <th class="w-1/5 px-3 py-2 text-center">Remove</th>
+          </tr>
+        </thead>
+
+        <tbody id="sales-items-body">
+          <!-- JS inserts rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4 flex justify-between items-center">
+      <p class="font-semibold">
+        Total Items: <span id="sales-count">0</span>
+      </p>
+
+      <button
+        onclick="checkoutSale()"
+        class="bg-primary px-6 py-3 rounded font-bold text-lg">
+        SELL
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= BOTTOM NAV (IDENTICAL TO DASHBOARD) ================= -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t px-8 py-3 z-50">
+  <div class="flex justify-between text-xs font-semibold">
+
+    <!-- Dashboard -->
+    <div
+      class="flex flex-col items-center text-gray-500 cursor-pointer"
+      onclick="window.location.href='index.html'">
+      <span class="material-symbols-outlined text-2xl">dashboard</span>
+      Dashboard
+    </div>
+
+    <!-- Sales (ACTIVE) -->
+    <div class="flex flex-col items-center text-primary">
+      <span class="material-symbols-outlined text-2xl">point_of_sale</span>
+      Sales
+    </div>
+
+    <!-- Settings -->
+    <div
+      class="flex flex-col items-center text-gray-500 cursor-pointer"
+      onclick="window.location.href='settings.html'">
+      <span class="material-symbols-outlined text-2xl">settings</span>
+      Settings
+    </div>
+
+  </div>
+</nav>
+
+<!-- ================= JS ================= -->
+<script src="config.js"></script>
+<script src="sales.js"></script>
+
+</body>
+</html>

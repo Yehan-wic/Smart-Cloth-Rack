@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings | Smart Clothing Rack</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#f9f506",
+            background: "#f8f8f5"
+          },
+          fontFamily: {
+            display: ["Spline Sans"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-background font-display text-gray-900 min-h-screen">
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 bg-white border-b px-4 py-3 z-50">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined">settings</span>
+    <h1 class="text-xl font-bold">Admin Settings</h1>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="pb-24 px-4 mt-4 space-y-6">
+
+  <!-- ================= AREA NAV BAR (FIXED) ================= -->
+  <section class="bg-white rounded-xl shadow-sm p-2">
+    <div class="grid grid-cols-3 gap-2 text-center font-semibold">
+
+      <!-- Men (Active) -->
+      <button
+        class="area-tab py-3 rounded-lg border border-gray-300 bg-primary text-black"
+        data-area="Men">
+        Men
+      </button>
+
+      <!-- Women -->
+      <button
+        class="area-tab py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-800"
+        data-area="Women">
+        Women
+      </button>
+
+      <!-- Kids -->
+      <button
+        class="area-tab py-3 rounded-lg border border-gray-300 bg-gray-100 text-gray-800"
+        data-area="Kids">
+        Kids
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ================= ADD RACK + ITEM ================= -->
+  <section class="bg-white p-4 rounded-xl shadow-sm space-y-3">
+    <h2 class="font-bold text-lg">Create Rack & Item</h2>
+    <p class="text-xs text-gray-500">
+      One rack can contain only one clothing item.
+    </p>
+
+    <input id="rackInput"
+           placeholder="Rack ID (e.g. M-01)"
+           class="w-full border rounded px-3 py-2"/>
+
+    <input id="brandInput"
+           placeholder="Brand (e.g. Adidas)"
+           class="w-full border rounded px-3 py-2"/>
+
+    <input id="clothInput"
+           placeholder="Cloth Name (e.g. T-Shirt)"
+           class="w-full border rounded px-3 py-2"/>
+
+    <!-- IMAGE (REQUIRED) -->
+    <div>
+      <label class="block text-sm font-semibold mb-1">Cloth Image (Required)</label>
+      <input id="imageInput"
+             type="file"
+             accept="image/*"
+             required
+             class="w-full"/>
+    </div>
+
+    <button onclick="createRackWithItem()"
+            class="bg-primary w-full py-3 rounded font-bold">
+      Create Rack
+    </button>
+  </section>
+
+  <!-- ================= REGISTER ITEMS (BATCH BARCODE MODE) ================= -->
+  <section class="bg-white p-4 rounded-xl shadow-sm space-y-4">
+
+    <h2 class="font-bold text-lg">Register Items (Batch Barcode)</h2>
+
+    <!-- AREA & RACK -->
+    <div class="grid grid-cols-2 gap-3">
+      <select id="selectArea"
+              class="border rounded px-3 py-2"
+              onchange="loadRacksForAdmin()">
+        <option value="">Select Section</option>
+        <option>Men</option>
+        <option>Women</option>
+        <option>Kids</option>
+      </select>
+
+      <select id="selectRack"
+              class="border rounded px-3 py-2">
+        <option value="">Select Rack</option>
+      </select>
+    </div>
+
+    <button onclick="loadRackProductsAdmin()"
+            class="bg-primary w-full py-2 rounded font-bold">
+      Load Items
+    </button>
+
+    <!-- EXISTING PRODUCT PREVIEW -->
+    <div id="admin-rack-products" class="space-y-4"></div>
+
+    <!-- ================= BATCH SCAN PANEL ================= -->
+    <div class="border-t pt-4 space-y-3">
+
+      <h3 class="font-semibold">Scan Barcodes (Batch)</h3>
+
+      <input id="batchBarcodeInput"
+             placeholder="Scan barcode here"
+             class="w-full border rounded px-3 py-2"
+             autofocus />
+
+      <div class="overflow-x-auto">
+        <table class="w-full border rounded-lg table-fixed text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="w-1/2 px-3 py-2 text-left">Barcode</th>
+              <th class="w-1/4 px-3 py-2 text-center">Size</th>
+              <th class="w-1/4 px-3 py-2 text-center">Remove</th>
+            </tr>
+          </thead>
+          <tbody id="batch-items-body"></tbody>
+        </table>
+      </div>
+
+      <button onclick="submitBatchItems()"
+              class="bg-primary w-full py-3 rounded font-bold text-lg">
+        Add All Items
+      </button>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= BOTTOM NAV ================= -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t px-8 py-3 z-50">
+  <div class="flex justify-between text-xs font-semibold">
+
+    <!-- Dashboard -->
+    <div class="flex flex-col items-center text-gray-500 cursor-pointer"
+         onclick="window.location.href='index.html'">
+      <span class="material-symbols-outlined text-2xl">dashboard</span>
+      Dashboard
+    </div>
+
+    <!-- Sales -->
+    <div class="flex flex-col items-center text-gray-500 cursor-pointer"
+         onclick="window.location.href='sales.html'">
+      <span class="material-symbols-outlined text-2xl">point_of_sale</span>
+      Sales
+    </div>
+
+    <!-- Settings (ACTIVE) -->
+    <div class="flex flex-col items-center text-primary">
+      <span class="material-symbols-outlined text-2xl">settings</span>
+      Settings
+    </div>
+
+  </div>
+</nav>
+
+<script src="config.js"></script>
+<script src="settings.js"></script>
+
+</body>
+</html>

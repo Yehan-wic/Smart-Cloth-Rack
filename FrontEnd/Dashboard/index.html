@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inventory Management Dashboard</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#f9f506",
+            background: "#f8f8f5"
+          },
+          fontFamily: {
+            display: ["Spline Sans"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-background font-display text-gray-900 min-h-screen">
+
+<!-- ================= TOP BAR ================= -->
+<header class="sticky top-0 bg-white border-b px-4 py-3 z-50 space-y-3">
+
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined">inventory_2</span>
+      <h1 class="text-xl font-bold">Inventory</h1>
+    </div>
+
+    <button
+      onclick="window.location.href='sales.html'"
+      class="bg-primary px-4 py-2 rounded-full font-bold flex items-center gap-2">
+      <span class="material-symbols-outlined">point_of_sale</span>
+      Sales
+    </button>
+  </div>
+
+  <input
+    class="w-full rounded-xl px-4 py-2 bg-gray-100 outline-none"
+    placeholder="Search brands, items, or racks..."
+  />
+
+  <!-- AREA NAV -->
+  <div class="flex gap-2 bg-gray-100 p-1 rounded-xl">
+    <button class="area-tab flex-1 py-2 rounded-lg font-semibold bg-primary" data-area="Men">Men</button>
+    <button class="area-tab flex-1 py-2 rounded-lg font-semibold bg-white" data-area="Women">Women</button>
+    <button class="area-tab flex-1 py-2 rounded-lg font-semibold bg-white" data-area="Kids">Kids</button>
+  </div>
+
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="pb-28">
+
+  <div class="px-4 pt-4 hidden">
+    <div id="area-buttons"></div>
+  </div>
+
+  <div class="px-4 pt-4">
+    <h4 class="text-sm font-semibold mb-2">Racks</h4>
+    <div id="rack-buttons" class="flex gap-3 overflow-x-auto"></div>
+  </div>
+
+  <div class="px-4 mt-4">
+    <h3 class="text-lg font-bold mb-3">Live Stock Status</h3>
+    <div id="product-list" class="flex flex-col gap-3"></div>
+  </div>
+
+</main>
+
+<!-- ================= BOTTOM NAV (UNIFIED STYLE) ================= -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t px-8 py-3 z-50">
+  <div class="flex justify-between text-xs font-semibold">
+
+    <!-- Dashboard (ACTIVE) -->
+    <div class="flex flex-col items-center text-primary">
+      <span class="material-symbols-outlined text-2xl">dashboard</span>
+      Dashboard
+    </div>
+
+    <!-- Sales -->
+    <div
+      class="flex flex-col items-center text-gray-500 cursor-pointer"
+      onclick="window.location.href='sales.html'">
+      <span class="material-symbols-outlined text-2xl">point_of_sale</span>
+      Sales
+    </div>
+
+    <!-- Settings -->
+    <div
+      class="flex flex-col items-center text-gray-500 cursor-pointer"
+      onclick="window.location.href='settings.html'">
+      <span class="material-symbols-outlined text-2xl">settings</span>
+      Settings
+    </div>
+
+  </div>
+</nav>
+
+<!-- ================= JS ================= -->
+<script src="config.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

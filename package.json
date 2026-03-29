@@ -1,0 +1,55 @@
+{
+  "name": "inventory-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:backend": "node backend/server.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^40.4.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yehan.inventoryapp",
+    "productName": "Inventory App",
+    "directories": {
+      "output": "dist"
+    },
+
+    "asar": true,
+
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+
+    "extraResources": [
+      {
+        "from": "backend",
+        "to": "backend",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "FrontEnd",
+        "to": "FrontEnd",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
