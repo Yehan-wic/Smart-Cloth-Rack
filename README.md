@@ -77,10 +77,25 @@ This system helps retail stores monitor clothing stock efficiently with a digita
 
 ## 🔌 How It Works
 
-1. Admin updates stock from dashboard
-2. Backend publishes data via MQTT
-3. ESP32 subscribes to topic
-4. LCD updates in real-time
+### 🛍️ Real-World Flow (Customer Purchase)
+
+1. Customer selects and buys a clothing item at the store
+2. The cashier scans the item barcode using the system
+3. The backend updates the database (reduces stock count)
+4. Backend publishes updated stock data via MQTT
+5. ESP32 subscribed to the topic receives the update
+6. LCD display instantly updates the available sizes on the rack
+
+---
+
+### 📡 System Data Flow
+
+1. Admin manages products and stock via Electron desktop dashboard
+2. Dashboard communicates with Node.js backend via HTTP API
+3. Backend processes data and stores it in SQLite database
+4. Backend publishes real-time updates using MQTT
+5. ESP32 subscribes to the MQTT topic
+6. LCD display updates in real-time using SPI communication
 
 ---
 
