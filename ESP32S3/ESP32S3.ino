@@ -4,8 +4,8 @@
 #include <U8g2lib.h>
 
 // ---------------- WIFI + MQTT ----------------
-#define WIFI_SSID "Hiru"
-#define WIFI_PASS "12345678"
+#define WIFI_SSID "ssid"
+#define WIFI_PASS "password"
 #define RACK_ID     "M-01"
 
 // ✅ FIXED: USE CORRECT LAPTOP IP
