@@ -34,28 +34,28 @@ This system helps retail stores monitor clothing stock efficiently with a digita
 ## 🏗️ System Architecture
 
         +----------------------+
-        |   Admin Dashboard    |
-        | (Web Application)    |
+        | Admin Dashboard app  |
+        |(Electron Desktop App)|
         +----------+-----------+
                    |
-                   | HTTP API
+                   | HTTP API (Localhost)
                    v
         +----------------------+
-        |     Node.js Backend  |
-        |  (Server + Database) |
+        |    Node.js Backend   |
+        | (Server + SQLite DB) |
         +----------+-----------+
                    |
                    | MQTT Publish
                    v
         +----------------------+
-        |   MQTT Broker        |
-        |   (Mosquitto)        |
+        |     MQTT Broker      |
+        | (Mosquitto - local)  |
         +----------+-----------+
                    |
                    | MQTT Subscribe
                    v
         +----------------------+
-        |      ESP32           |
+        |        ESP32         |
         |  (WiFi Enabled MCU)  |
         +----------+-----------+
                    |
